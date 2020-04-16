@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7e12b91a-9b44-4a3a-bd32-178f83504145" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="6abcd9b0-10e2-46f6-b8d8-493e63f2c900" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="86bc5365-4909-461a-ac2a-185a9b44a570" basePath="/api/flights" >
+		<http:request-connection host="training-american-ws.cloudhub.io" port="80" />
+	</http:request-config>
+	<http:listener-config name="HTTP_Listener_config2" doc:name="HTTP Listener config" doc:id="d2760cf7-e448-471e-959f-3e3ed3bfa999" >
+		<http:listener-connection host="0.0.0.0" port="8080" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config3" doc:name="HTTP Listener config" doc:id="e247b6b7-ca5f-4dc9-8b44-0d299e1d8d4b" >
+		<http:listener-connection host="0.0.0.0" port="8088" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="987bbe15-fa93-4133-a766-463ddbedf97c" basePath="/api/flights" >
+		<http:request-connection host="training-american-ws.cloudhub.io" port="80" />
+	</http:request-config>
+	<flow name="hellovishal_appFlow" doc:id="d2ce318c-5015-4546-a43f-714590e86296" >
+		<http:listener doc:name="Listener" doc:id="e4ed23dc-4872-407c-b7cb-bbfc0a6f2142" config-ref="HTTP_Listener_config" path="/hellovishalmessage"/>
+		<set-payload value="Welcome to Mule" doc:name="SetPayload" doc:id="cdc0806f-0077-4bea-b3e8-8c1d211dd7d6" />
+		<logger level="INFO" doc:name="Logger" doc:id="48257ab6-4b81-48f8-841f-08afb8e68c88" message="Hello Vishal-Started"/>
+	</flow>
+	<flow name="hellovishal_appFlow1" doc:id="ca8084c5-48a0-462a-b89d-e78f8a4acf2c" >
+		<http:listener doc:name="Listener" doc:id="89dd585c-5380-4e14-8575-69316decd8ef" config-ref="HTTP_Listener_config3" path="/getFlights"/>
+		<http:request method="GET" doc:name="Request" doc:id="7da42bf6-9202-41a5-afe4-6fbd5a92ede3" config-ref="HTTP_Request_configuration1"/>
+	</flow>
+</mule>
